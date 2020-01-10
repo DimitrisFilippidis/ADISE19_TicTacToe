@@ -1,0 +1,23 @@
+{
+  "name": "adise19_tictactoe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iee-ihu-gr-course1941/ADISE19_TicTacToe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iee-ihu-gr-course1941/ADISE19_TicTacToe/issues"
+  },
+  "homepage": "https://github.com/iee-ihu-gr-course1941/ADISE19_TicTacToe#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}

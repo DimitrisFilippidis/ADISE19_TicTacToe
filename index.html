@@ -38,13 +38,23 @@
         </style>
 
         <script>
+            function play(){
+                var uname = document.getElementById('uname').value;
+
+                if(uname != "")){
+                    document.getElementById('login').style = "visibility:hidden;";
+                    document.getElementById('ttt_logo').style = "visibility:hidden;";
+                }
+                else{
+                    alert("Fill in the field.");
+                }
+            }
         </script>
     </head>
     <body>
-        <img style="position:absolute;left:45.5%;top:8%;" src="assets/logo.png"></img>
+        <img id = "ttt_logo" style="position:absolute;left:45.5%;top:8%;" src="assets/logo.png"></img>
         <div id="login">
-            <input class="fields" id="uname1" type="text" placeholder="Player 1 - Username"><br><br>
-            <input class="fields" id="uname2" type="text" placeholder="Player 2 - Username"><br><br>
+            <input class="fields" id="uname" type="text" placeholder="Username"><br><br>
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
     </body> 
