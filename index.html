@@ -45,8 +45,17 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
-        
-        <script>
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script>
+			//var socket = io.connect('http://localhost:3000');
+            var socket = io.connect('https://users.iee.ihu.gr/~it174982/ADISE19_TicTacToe/');
+            
+            socket.emit("test");
+
+            socket.on("test_response", function(){
+                alert("connected.");
+            });
+
             function play(){
                 var uname = document.getElementById('uname').value;
 

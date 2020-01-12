@@ -40,6 +40,13 @@ db.connect((err) => {
 //GLOBALS++
 var SOCKET_LIST = {};
 var players = 0;
+var playerIDs = 3;
+var player_accounts = [{id: 0, username: "", score: 0}, {id: 0, username: "", score: 0}];
+var board = [
+    ['','',''],
+    ['','',''],
+    ['','','']
+];
 
 //GLOBALS--
 
@@ -50,7 +57,16 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     socket.on("login", function(username){
         if(players < 2){
             players++;
+            player_accounts[players].id = playerIDs;
+            player_accounts[players].username = username;
+            //player_accounts[players].score = getScore();
+            playerIDs++;
         }
+    });
+
+
+    socket.on("test", function(){
+        socket.emit("test_response");
     });
 
     db.connect(function(err) {
@@ -59,6 +75,6 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             if (err) throw err;
             console.log(results);
         });
-      });
+    });
 
 });
