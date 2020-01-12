@@ -2,8 +2,8 @@
 -- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Φιλοξενητής: localhost:3307
--- Χρόνος δημιουργίας: 05 Ιαν 2020 στις 12:42:44
+-- Φιλοξενητής: localhost:3306
+-- Χρόνος δημιουργίας: 12 Ιαν 2020 στις 17:43:20
 -- Έκδοση διακομιστή: 10.4.8-MariaDB
 -- Έκδοση PHP: 7.3.11
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `players` (
   `id` int(11) DEFAULT NULL,
   `username` text COLLATE utf8_bin DEFAULT NULL,
-  `boxes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ;
+  `score` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

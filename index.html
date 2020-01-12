@@ -37,20 +37,6 @@
                 color: #000000;
             }
         </style>
-
-        <script>
-            function play(){
-                var uname = document.getElementById('uname').value;
-
-                if(uname != "")){
-                    document.getElementById('login').style = "visibility:hidden;";
-                    document.getElementById('ttt_logo').style = "visibility:hidden;";
-                }
-                else{
-                    alert("Fill in the field.");
-                }
-            }
-        </script>
     </head>
     <body>
         <img id = "ttt_logo" style="position:absolute;left:45.5%;top:8%;" src="assets/logo.png"></img>
@@ -58,5 +44,25 @@
             <input class="fields" id="uname" type="text" placeholder="Username"><br><br>
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
+
+        
+        <script>
+            function play(){
+                var uname = document.getElementById('uname').value;
+
+                if(uname.trim() != ""){
+                    document.getElementById('login').style = "visibility:hidden;";
+                    document.getElementById('ttt_logo').style = "visibility:hidden;";
+
+                    //show TTT
+
+                    socket.emit("login", uname);
+                }
+                else{
+                    alert("Fill in the username field correctly.");
+                }
+            }
+        </script>
+
     </body> 
 </html>
