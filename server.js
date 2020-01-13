@@ -22,7 +22,7 @@ var io = require('socket.io') (server, {});
 //SETUP------
 
 //CONNECT MYSQL
-/*var db = mysql.createConnection({
+var db = mysql.createConnection({
     server      : 'users.iee.ihu.gr',
     user        : 'root',
     password    : 'dbpass',
@@ -32,10 +32,10 @@ var io = require('socket.io') (server, {});
 
 db.connect((err) => {
     if(err){
-        throw err;
+        //throw err;
     }
     console.log("---MYSQL CONNECTED---");
-});*/
+});
 
 //GLOBALS++
 var SOCKET_LIST = {};
@@ -50,10 +50,10 @@ var board = [
 
 //GLOBALS--
 
-    /*db.query("SELECT * FROM players", function (err, results){   //, fields) {
-        if (err) throw err;
+    db.query("SELECT * FROM players", function (err, results){   //, fields) {
+        //if (err) throw err;
         console.log(results);
-    });*/
+    });
 
 //SOCKET CONNECTED
 io.sockets.on('connection', function(socket){//SOCKETS++++++
