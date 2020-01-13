@@ -27,7 +27,7 @@ var db = mysql.createConnection({
     user        : 'root',
     password    : 'dbpass',
     database    : 'tttdb',
-    socketPath  : '/home/student/it/2017/it174982/mysql/run/mysql.sock'
+    _socket     : '/home/student/it/2017/it174982/mysql/run/mysql.sock'
 });
 
 db.connect((err) => {
