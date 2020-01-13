@@ -32,7 +32,7 @@ var db = mysql.createConnection({
 
 db.connect((err) => {
     if(err){
-        //throw err;
+        throw err;
     }
     console.log("---MYSQL CONNECTED---");
 });
@@ -51,7 +51,7 @@ var board = [
 //GLOBALS--
 
     db.query("SELECT * FROM players", function (err, results){   //, fields) {
-        //if (err) throw err;
+        if (err) throw err;
         console.log(results);
     });
 
