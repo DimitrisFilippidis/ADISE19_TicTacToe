@@ -24,6 +24,7 @@ var io = require('socket.io') (server, {});
 //CONNECT MYSQL
 var db = mysql.createConnection({
     server      : 'users.iee.ihu.gr',
+    port        : 3306,
     user        : 'root',
     password    : 'dbpass',
     database    : 'tttdb',
