@@ -31,12 +31,12 @@ var db = mysql.createConnection({
     _socket: '/home/student/it/2017/it174982/mysql/run/mysql.sock'
 });
 
-db.connect((err) => {
-    if(err){
-        throw err;
-    }
-    console.log("---MYSQL CONNECTED---");
-});
+//db.connect((err) => {
+   // if(err){
+        //throw err;
+    //}
+    //console.log("---MYSQL CONNECTED---");
+//});
 
 //GLOBALS++
 var SOCKET_LIST = {};
@@ -51,10 +51,10 @@ var board = [
 
 //GLOBALS--
 
-    db.query("SELECT * FROM players", function (err, results){   //, fields) {
-        if (err) throw err;
-        console.log(results);
-    });
+    //db.query("SELECT * FROM players", function (err, results){   //, fields) {
+        //if (err) throw err;
+        //console.log(results);
+    //});
 
 //SOCKET CONNECTED
 io.sockets.on('connection', function(socket){//SOCKETS++++++
