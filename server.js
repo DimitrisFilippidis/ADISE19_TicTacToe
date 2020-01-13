@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
 
 app.use('/assets', express.static(__dirname + '/assets'));
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 server.listen(port);
 console.log("---SERVER RUNNING---");
