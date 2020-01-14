@@ -140,7 +140,7 @@ function checkWin(){
         winner = board[0][2];
      
     if(winner != ""){
-        socket.emit("win", winner);
+        socket.broadcast.emit("win", winner);
     }
         
 }
