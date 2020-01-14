@@ -22,20 +22,27 @@ var io = require('socket.io') (server, {});
 //SETUP------
 
 //CONNECT MYSQL
-var db = mysql.createConnection({
+/*var db = mysql.createConnection({
     server      : 'users.iee.ihu.gr',
     user        : 'root',
     password    : 'dbpass',
     database    : 'tttdb',
     _socket     : '/home/student/it/2017/it174982/mysql/run/mysql.sock'
+});*/
+
+var db = mysql.createConnection({
+    host        : 'eu-cdbr-west-02.cleardb.net',
+    user        : 'b760f6b956efa5',
+    password    : '6485311a',
+    database    : 'heroku_7c65a958dfb211b'
 });
 
-/*db.connect((err) => {
+db.connect((err) => {
     if(err){
         throw err;
     }
     console.log("---MYSQL CONNECTED---");
-});*/
+});
 
 //GLOBALS++
 var SOCKET_LIST = {};
@@ -75,12 +82,13 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
    // });
 
     socket.on("input", function(data){
-        var i = data.i;
-        var j = data.j;
-        var input = data.input;
+        var i = data.arr[0];
+        var j = data.arr[1];
+        var input = data.player;
 
         board[i][j] = input;
         checkWin();
+        socket.broadcast.emit('oppInput', data);
     });
 });
 
