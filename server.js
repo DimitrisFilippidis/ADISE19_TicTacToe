@@ -30,12 +30,12 @@ var db = mysql.createConnection({
     _socket     : '/home/student/it/2017/it174982/mysql/run/mysql.sock'
 });
 
-db.connect((err) => {
+/*db.connect((err) => {
     if(err){
         throw err;
     }
     console.log("---MYSQL CONNECTED---");
-});
+});*/
 
 //GLOBALS++
 var SOCKET_LIST = {};
@@ -50,10 +50,10 @@ var board = [
 
 //GLOBALS--
 
-    db.query("SELECT * FROM players", function (err, results){   //, fields) {
+    /*db.query("SELECT * FROM players", function (err, results){   //, fields) {
         if (err) throw err;
         console.log(results);
-    });
+    });*/
 
 //SOCKET CONNECTED
 io.sockets.on('connection', function(socket){//SOCKETS++++++
@@ -70,10 +70,18 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     });
 
 
-    socket.on("test", function(){
-        socket.emit("test_response");
-    });
+    //socket.on("test", function(){
+       // socket.emit("test_response");
+   // });
 
+    socket.on("input", function(data){
+        var i = data.i;
+        var j = data.j;
+        var input = data.input;
+
+        board[i][j] = input;
+        checkWin();
+    });
 });
 
 function checkWin(){

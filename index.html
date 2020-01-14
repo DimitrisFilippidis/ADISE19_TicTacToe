@@ -50,11 +50,11 @@
 			//var socket = io.connect('http://localhost:3000');
             var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
             
-            socket.emit("test");
+            //socket.emit("test");
 
-            socket.on("test_response", function(){
-                alert("connected.");
-            });
+            //socket.on("test_response", function(){
+                //alert("connected.");
+            //});
 
             function play(){
                 var uname = document.getElementById('uname').value;
