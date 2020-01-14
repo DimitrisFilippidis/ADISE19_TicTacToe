@@ -88,10 +88,10 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     socket.on("login", function(username){
         if(players < 2){
             players++;
-            player_accounts[players].id = playerIDs;
-            player_accounts[players].username = username;
+            //player_accounts[players].id = playerIDs;
+            //player_accounts[players].username = username;
             //player_accounts[players].score = getScore();
-            playerIDs++;
+            //playerIDs++;
         }
     });
 
