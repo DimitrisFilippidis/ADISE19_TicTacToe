@@ -44,6 +44,24 @@ db.connect((err) => {
     console.log("---MYSQL CONNECTED---");
 });
 
+db.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+
+  function handleDisconnect(){
+    db.connect((err) => {
+        if(err){
+            throw err;
+        }
+        console.log("---MYSQL CONNECTED---");
+    });
+  }
+
 //GLOBALS++
 var SOCKET_LIST = {};
 var players = 0;
