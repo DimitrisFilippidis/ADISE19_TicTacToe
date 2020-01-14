@@ -57,7 +57,7 @@ var board = [
 
 //GLOBALS--
 
-    db.query("INSERT INTO players (id, username, score) VALUES (1, 'Admin1', 0)", function (err, results){   //, fields) {
+    db.query("SELECT * FROM players", function (err, results){   //, fields) {
         if (err) throw err;
         console.log(results);
     });
