@@ -233,10 +233,10 @@
         <button onClick="startGame()">Replay</button>
 
 
-        
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
         <script>
         
-        var socket = io.connect('http://localhost:3000');
+        //var socket = io.connect('http://localhost:3000');
             var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
         var origBoard;
         const player1 = 'X';
