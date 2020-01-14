@@ -208,17 +208,6 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
-
-        var socket = io.connect('http://localhost:3000');
-            var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
-
-
-
-
-
-
-
-
         <table id= "ttt_table" style = "visibility: hidden;">
 
             <tr>
@@ -237,14 +226,6 @@
                 <td class="cell" id="8"></td>
             </tr>
 
-
-
-
-
-        
-
-
-
         <div class="endgame">
 
             <div class="text"></div>
@@ -255,6 +236,8 @@
         
         <script>
         
+        var socket = io.connect('http://localhost:3000');
+            var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
         var origBoard;
         const player1 = 'X';
 
