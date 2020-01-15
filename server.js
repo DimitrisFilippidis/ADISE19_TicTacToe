@@ -73,6 +73,7 @@ var board = [
     ['','',''],
     ['','','']
 ];
+var turn = 'X';
 
 //GLOBALS--
 
@@ -114,9 +115,16 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
         var j = data.arr[1];
         var input = data.playerSymbol;
 
-        board[i][j] = input;
-        socket.broadcast.emit('oppInput', data);
-        checkWin();
+        if(input == turn){
+            board[i][j] = input;
+            socket.broadcast.emit('oppInput', data);
+            checkWin();
+
+            if(turn == 'X')
+                turn = 'O';
+            else
+                turn = 'X';
+        }
     });
 });
 
@@ -149,7 +157,7 @@ function checkWin(){
         winner = board[0][2];
      
     if(winner != ""){
-        socket.broadcast.emit("win", winner);
+        io.emit("win", {winner});
         players = 0;
         board = [
             ['','',''],

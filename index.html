@@ -221,9 +221,10 @@
         //var socket = io.connect('http://localhost:3000');
             var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
         var origBoard;
-        const player1 = 'X';
+        //const player1 = 'X';
         var playerSymbol = 'X';
-        const player2 = 'O';
+        //const player2 = 'O';
+        var myTurn = false;
 
     
 
@@ -251,11 +252,14 @@ function turnClick(square) {
 }
 
 function turn(squareId, player) {
-	//origBoard[squareId] = player;
-    document.getElementById(squareId).innerText = playerSymbol;
-    var arr = translate(squareId);
-    var data = {arr, playerSymbol, squareId};
-    socket.emit("input", data);
+    //origBoard[squareId] = player;
+    if(myTurn){
+        document.getElementById(squareId).innerText = playerSymbol;
+        var arr = translate(squareId);
+        var data = {arr, playerSymbol, squareId};
+        socket.emit("input", data);
+        myTurn = false;
+    }
 }
 
 function translate(square){
@@ -324,11 +328,15 @@ function translate(square){
 
 
             socket.on("oppInput", function(data){
-            	document.getElementById(data.squareId).innerText = data.playerSymbol;
+                document.getElementById(data.squareId).innerText = data.playerSymbol;
+                myTurn = true;
             });
             
             socket.on("setSymbol", function(data){
                 playerSymbol = data.symbol;
+
+                if(playerSymbol == 'X')
+                    myTurn = true;
             });
 
             socket.on("reload", function(){
@@ -336,6 +344,10 @@ function translate(square){
                 window.open('https://adise19-tictactoe.herokuapp.com/',_self);
             });
 
+            socket.on("win", function(data){
+                alert(data.winner+"won.");
+                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+            });
         </script>
 
     </body> 
