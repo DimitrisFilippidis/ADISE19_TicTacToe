@@ -283,7 +283,7 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
-        <div id= "uname"></div>
+        <div id= "uname" style="visibility:hidden;"></div>
 
         <table id= "ttt_table" style = "visibility: hidden;">
 
@@ -413,6 +413,8 @@ function translate(square){
                     document.getElementById('login').style = "visibility:hidden;";
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
                     document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
+                    document.getElementById('uname').style = "visibility:visible;";
+
                     
                     socket.emit("login", uname);
                 }
@@ -423,7 +425,6 @@ function translate(square){
 
             socket.on("displayUsernames", function(data){
                 document.getElementById("uname").innerHTML = ""+data.unames;
-
             });
 
             socket.on("inputApproved", function(data){
