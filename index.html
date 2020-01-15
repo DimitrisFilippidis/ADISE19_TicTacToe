@@ -222,7 +222,7 @@ function translate(square){
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
                     document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
                     document.getElementById('player_usernames').style = "visibility:visible;";
-                    console.log("MYTURN::::"+myTurn);
+
                     socket.emit("login", {uname});
                 }
                 else{
@@ -246,7 +246,7 @@ function translate(square){
             
             socket.on("setSymbol", function(data){
                 playerSymbol = data.symbol;
-
+                console.log("Symbol: "+playerSymbol);
                 if(playerSymbol == 'X')
                     myTurn = true;
             });

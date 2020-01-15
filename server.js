@@ -101,7 +101,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             else
                 symbol = 'O';
             socket.emit("setSymbol",{symbol});
-
+            console.log("players: "+players);
             //if(checkAccExists(data.name)){                
                // player_accounts[players-1].score = getScore(data.uname);
             //}
