@@ -73,8 +73,7 @@ setInterval(function () {
 //GLOBALS++
 var SOCKET_LIST = {};
 var players = 0;
-var playerIDs = 4;
-var player_accounts = [{id: 0, username: "", score: 0}, {id: 0, username: "", score: 0}];
+var player_accounts = [{username: "", score: 0}, {username: "", score: 0}];
 var board = [
     ['','',''],
     ['','',''],
@@ -106,17 +105,14 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             if(checkAccExists(data.name)){                
                 player_accounts[players-1].score = getScore(data.uname);
             }
-            else{
+            /*else{
                 db.query("INSERT INTO players (id, username, score) VALUES ("+playerIDs+", '"+data.uname+"', "+0+")", function (err, results){
                     if (err) throw err;
                     console.log(results);
                 });
-            }
+            }*/
                 
-
-            player_accounts[players-1].id = playerIDs;
             player_accounts[players-1].username = data.uname;
-            playerIDs++;
 
             if(players == 2){
                 var unames = player_accounts[0].username+"-Score:"+player_accounts[0].score+"-VS-"+player_accounts[1].username+"-Score:"+player_accounts[1].score;
@@ -227,7 +223,7 @@ function checkAccExists(name){
     db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
         if (err) throw err;
         res = results;//.substring(14);
-        console.log("res: "+typeof res);
+        console.log("res: "+JSON.stringify(res));
     });
     /*if(res.username != ""){
         return true;
