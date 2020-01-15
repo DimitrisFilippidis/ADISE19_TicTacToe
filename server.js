@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             //player_accounts[players].score = getScore();
             //playerIDs++;
 
-            if(players == 1){
+            if(players == 2){
                 var unames = player_accounts[0].username+"-VS-"+player_accounts[1].username;
                 io.emit("displayUsernames", {unames});
             }
