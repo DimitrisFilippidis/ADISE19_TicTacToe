@@ -84,21 +84,6 @@
                 
             }
             
-            .endgame {
-                display: none;
-                width: 200px;
-                top: 120px;
-                background-color: rgba(205,133,63, 0.8);
-                position: absolute;
-                left: 50%;
-                margin-left: -100px;
-                padding-top: 50px;
-                padding-bottom: 50px;
-                text-align: center;
-                border-radius: 5px;
-                color: white;
-                font-size: 2em;
-            }
 
         </style>
 
@@ -237,8 +222,7 @@ function translate(square){
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
                     document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
                     document.getElementById('player_usernames').style = "visibility:visible;";
-
-                    
+                    console.log("MYTURN::::"+myTurn);
                     socket.emit("login", {uname});
                 }
                 else{
