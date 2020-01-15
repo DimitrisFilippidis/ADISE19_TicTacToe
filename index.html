@@ -248,10 +248,10 @@
 
 
 function turnClick(square) {
-	turn(square.target.id, player1)
+	turn(square.target.id)//, player1)
 }
 
-function turn(squareId, player) {
+function turn(squareId) {
     //origBoard[squareId] = player;
     if(myTurn){
         document.getElementById(squareId).innerText = playerSymbol;
