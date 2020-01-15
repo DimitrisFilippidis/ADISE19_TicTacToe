@@ -408,7 +408,7 @@ function translate(square){
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
                     document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
                     
-                    socket.emit("login", uname);
+                    socket.emit("login", {uname});
                 }
                 else{
                     alert("Fill in the username field correctly.");
