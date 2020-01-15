@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
                 player_accounts[players-1].score = getScore(data.uname);
             }
             else{
-                db.query("INSERT INTO players (id, username, score) VALUES ("+playerIDs+", "+data.uname+", "+0+")", function (err, results){
+                db.query("INSERT INTO players (id, username, score) VALUES ("+playerIDs+", '"+data.uname+"', "+0+")", function (err, results){
                     if (err) throw err;
                     console.log(results);
                 });
