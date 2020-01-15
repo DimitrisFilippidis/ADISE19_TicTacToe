@@ -283,6 +283,8 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
+        <div id= "uname">  </div>
+
         <table id= "ttt_table" style = "visibility: hidden;">
 
             <tr>
@@ -306,6 +308,10 @@
             <div class="text"></div>
         </div>
 
+        <div>
+
+        </div>
+
         <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
         <script>
         
@@ -323,6 +329,8 @@
     const cells = document.querySelectorAll('.cell');
 
     startGame();
+
+
 
     function startGame() {
 	//document.querySelector(".endgame").style.display = "none";
@@ -343,7 +351,6 @@ function turnClick(square) {
 function turn(squareId) {
     //origBoard[squareId] = player;
     if(myTurn){
-        document.getElementById(squareId).innerText = playerSymbol;
         var arr = translate(squareId);
         var data = {arr, playerSymbol, squareId};
         socket.emit("input", data);
@@ -408,12 +415,23 @@ function translate(square){
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
                     document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
                     
-                    socket.emit("login", {uname});
+                    socket.emit("login", uname);
                 }
                 else{
                     alert("Fill in the username field correctly.");
                 }
             }
+
+            socket.on("displayUsernames", function(data){
+                document.getElementById("id").innerHTML = "data.uname";
+
+            });
+
+            socket.on("inputApproved", function(data){
+            document.getElementById(data.squareId).innerText = "data.Input";
+            });
+
+    
 
 
             socket.on("oppInput", function(data){
