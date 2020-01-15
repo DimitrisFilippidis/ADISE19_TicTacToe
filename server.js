@@ -125,11 +125,13 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     socket.on("input", function(data){
         var i = data.arr[0];
         var j = data.arr[1];
+        var squareId = data.squareId;
         var input = data.playerSymbol;
 
-        if(input == turn){
+        if(input == turn && board[i][j] == ''){
             board[i][j] = input;
             socket.broadcast.emit('oppInput', data);
+            socket.emit("inputApproved", {squareId, input});
             checkWin();
 
             if(turn == 'X')
