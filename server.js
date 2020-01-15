@@ -146,6 +146,12 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
 
     socket.on('disconnect', function () {
         io.emit('disconnected');  
+        players = 0;
+        board = [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ];
     });
 });
 
