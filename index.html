@@ -423,12 +423,12 @@ function translate(square){
             }
 
             socket.on("displayUsernames", function(data){
-                document.getElementById("uname").innerHTML = "data.uname";
+                document.getElementById("uname").innerHTML = data.uname;
 
             });
 
             socket.on("inputApproved", function(data){
-            document.getElementById(data.squareId).innerText = "data.Input";
+            document.getElementById(data.squareId).innerText = data.Input;
             });
 
     
