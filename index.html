@@ -256,10 +256,6 @@ function turn(squareId, player) {
     var arr = translate(squareId);
     var data = {arr, playerSymbol, squareId};
     socket.emit("input", data);
-
-
-
-
 }
 
 function translate(square){
@@ -328,7 +324,7 @@ function translate(square){
 
 
             socket.on("oppInput", function(data){
-            	document.getElementById(data.squareId).innerText = data.player;
+            	document.getElementById(data.squareId).innerText = data.playerSymbol;
             });
             
             socket.on("setSymbol", function(data){
