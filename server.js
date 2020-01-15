@@ -112,7 +112,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     socket.on("input", function(data){
         var i = data.arr[0];
         var j = data.arr[1];
-        var input = data.player;
+        var input = data.playerSymbol;
 
         board[i][j] = input;
         socket.broadcast.emit('oppInput', data);
