@@ -229,8 +229,8 @@ function checkAccExists(name){
         res = results.substring(14);
         console.log("res: "+res);
     });
-    if(res.username != ""){
+    /*if(res.username != ""){
         return true;
     }
-    return false;
+    return false;*/
 }
