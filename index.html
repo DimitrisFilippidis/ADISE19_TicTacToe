@@ -1,4 +1,4 @@
-<html>
+<!--<html>
     <head>
         <title>Tic Tac Toe</title>
         <link rel="icon" href="assets/ttt_icon.png" type = "image/x-icon">
@@ -45,8 +45,17 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
-        
-        <script>
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script>
+			//var socket = io.connect('http://localhost:3000');
+            var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
+            
+            //socket.emit("test");
+
+            //socket.on("test_response", function(){
+                //alert("connected.");
+            //});
+
             function play(){
                 var uname = document.getElementById('uname').value;
 
@@ -66,3 +75,282 @@
 
     </body> 
 </html>
+
+<-- -->
+
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>Tic Tac Toe</title>
+    
+        <link rel="icon" href="assets/ttt_icon.png" type = "image/x-icon">
+
+        <style>
+
+            html{
+                background-color:rgb(70, 70, 70);
+                cursor: url('assets/cursor.png'), auto;
+            }
+
+            #login{
+                position: absolute;
+                width: 10%;
+                height: 10%;
+                left: 45%;
+                top: 20%;
+            }
+
+            #playBTN{
+                background-color: rgb(30, 224, 30);
+                font-weight: bold;
+                border: 3px solid #000000;
+                width: 100%;
+                height: 50%;
+            }
+
+            #playBTN:hover{
+                background-color: rgb(72, 240, 72);
+            }
+
+            .fields{
+                border: 3px solid #000000;
+                background-color: #dfdfdf;
+                width: 100%;
+                height: 30%;
+                color: #000000;
+            }
+
+
+            td {	
+                border:  2px solid #333;
+                height:  100px;
+                width:  100px;
+                text-align:  center;
+                vertical-align:  middle;
+                font-family:  "Comic Sans MS", cursive, sans-serif;
+                font-size: 70px;
+            }
+   
+            h1 {
+                text-align: center;
+            }
+   
+            table {
+                border-collapse: collapse;
+                position: absolute;
+                left: 50%;
+                margin-left: -155px;
+                top: 70px;
+            }
+                
+            table tr:first-child td {
+                    border-top: 0;
+                    }
+                    
+            table tr:last-child td {
+                border-bottom: 0
+                }
+                
+                
+            table tr td:first-child {
+                border-left: 0;
+                
+            }
+            
+            table tr td:last-child {
+                border-right: 0;
+                
+            }
+            
+            .endgame {
+                display: none;
+                width: 200px;
+                top: 120px;
+                background-color: rgba(205,133,63, 0.8);
+                position: absolute;
+                left: 50%;
+                margin-left: -100px;
+                padding-top: 50px;
+                padding-bottom: 50px;
+                text-align: center;
+                border-radius: 5px;
+                color: white;
+                font-size: 2em;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <img id = "ttt_logo" style="position:absolute;left:45.5%;top:8%;" src="assets/logo.png"></img>
+        <div id="login">
+            <input class="fields" id="uname" type="text" placeholder="Username"><br><br>
+            <button id="playBTN" onclick="play();">PLAY</button>
+        </div>
+
+        <table id= "ttt_table" style = "visibility: hidden;">
+
+            <tr>
+                <td class="cell" id="0"></td>
+                <td class="cell" id="1"></td>
+                <td class="cell" id="2"></td>
+            </tr>
+            <tr>
+                <td class="cell" id="3"></td>
+                <td class="cell" id="4"></td>
+                <td class="cell" id="5"></td>
+            </tr>
+            <tr>
+                <td class="cell" id="6"></td>
+                <td class="cell" id="7"></td>
+                <td class="cell" id="8"></td>
+            </tr>
+
+        <div class="endgame">
+
+            <div class="text"></div>
+        </div>
+        <button onClick="startGame()">Replay</button>
+
+
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <script>
+        
+        //var socket = io.connect('http://localhost:3000');
+            var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
+        var origBoard;
+        //const player1 = 'X';
+        var playerSymbol = 'X';
+        //const player2 = 'O';
+        var myTurn = false;
+
+    
+
+
+    const cells = document.querySelectorAll('.cell');
+
+    startGame();
+
+
+
+    function startGame() {
+	//document.querySelector(".endgame").style.display = "none";
+	origBoard = Array.from(Array(9).keys());
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].innerText = '';
+		cells[i].style.removeProperty('background-color');
+		cells[i].addEventListener('click', turnClick, false);
+	}
+}
+
+
+
+function turnClick(square) {
+	turn(square.target.id)//, player1)
+}
+
+function turn(squareId) {
+    //origBoard[squareId] = player;
+    if(myTurn){
+        document.getElementById(squareId).innerText = playerSymbol;
+        var arr = translate(squareId);
+        var data = {arr, playerSymbol, squareId};
+        socket.emit("input", data);
+        myTurn = false;
+    }
+}
+
+function translate(square){
+	var IJ = [];
+
+	if(square == 0){
+  	IJ[0] = 0;
+    IJ[1] = 0;
+  }
+  else if(square == 1){
+  	IJ[0] = 0;
+    IJ[1] = 1;
+  }
+  
+  else if(square == 2) {
+  IJ[0] = 0;
+  IJ[1] = 2;
+  }
+  
+  else if(square == 3) {
+  IJ[0] = 1;
+  IJ[1] = 0;
+ }
+  
+  else if(square == 4) {
+  IJ[0] = 1;
+  IJ[1] = 1;
+ }
+  else if(square == 5) {
+  IJ[0] = 1;
+  IJ[1] = 2;
+ }
+  
+  else if(square == 6) {
+  IJ[0] = 2;
+  IJ[1] = 0;
+ }
+  else if(square == 7) {
+  IJ[0] = 2;
+  IJ[1] = 1;
+ }
+  else if(square == 8) {
+  IJ[0] = 2;
+  IJ[1] = 2;
+ }
+  
+  return IJ;
+}
+
+
+
+            function play(){
+                var uname = document.getElementById('uname').value;
+
+                if(uname.trim() != ""){
+                    document.getElementById('login').style = "visibility:hidden;";
+                    document.getElementById('ttt_logo').style = "visibility:hidden;";
+                    document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
+                    
+                    socket.emit("login", uname);
+                }
+                else{
+                    alert("Fill in the username field correctly.");
+                }
+            }
+
+
+            socket.on("oppInput", function(data){
+                document.getElementById(data.squareId).innerText = data.playerSymbol;
+                myTurn = true;
+            });
+            
+            socket.on("setSymbol", function(data){
+                playerSymbol = data.symbol;
+
+                if(playerSymbol == 'X')
+                    myTurn = true;
+            });
+
+            socket.on("reload", function(){
+                alert("2 users already playing.");
+                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+            });
+
+            socket.on("win", function(data){
+                alert(data.winner+" won.");
+                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+            });
+        </script>
+
+    </body> 
+</html>
+
+<!---->
