@@ -73,7 +73,7 @@ setInterval(function () {
 //GLOBALS++
 var SOCKET_LIST = {};
 var players = 0;
-var playerIDs = 3;
+var playerIDs = 4;
 var player_accounts = [{id: 0, username: "", score: 0}, {id: 0, username: "", score: 0}];
 var board = [
     ['','',''],
