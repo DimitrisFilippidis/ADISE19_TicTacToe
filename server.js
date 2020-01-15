@@ -141,6 +141,10 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
                 turn = 'X';
         }
     });
+
+    socket.on('disconnect', function () {
+        io.emit('disconnected');  
+    });
 });
 
 function checkWin(){

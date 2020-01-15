@@ -453,6 +453,11 @@ function translate(square){
                 alert(data.winner+" won.");
                 window.open('https://adise19-tictactoe.herokuapp.com/','_self');
             });
+
+            socket.on("disconnected", function(){
+                alert("Player disconnected.");
+                window.open('https://adise19-tictactoe.herokuapp.com/','_self');
+            });
         </script>
 
     </body> 
