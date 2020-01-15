@@ -44,13 +44,10 @@ db.connect((err) => {
     console.log("---MYSQL CONNECTED---");
 });
 
-var disconnected = false;
-
-db.on('error', function(err) {
+/*db.on('error', function(err) {
     console.log('db error', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-        disconnected = true;
-        handleDisconnect();                         // lost due to either server restart, or a
+        handleDisconnect();                        // lost due to either server restart, or a
     } else {                                      // connnection idle timeout (the wait_timeout
       throw err;                                  // server variable configures this)
     }
@@ -58,7 +55,6 @@ db.on('error', function(err) {
 
   
   function handleDisconnect(){
-         if(disconnected){
             db.connect((err) => {
                 if(err){
                     setInterval(handleDisconnect, 2000);
@@ -66,8 +62,13 @@ db.on('error', function(err) {
                 }
                 console.log("---MYSQL CONNECTED---");
             });
-        }
-  }
+    }
+  
+*/
+
+setInterval(function () {
+    db.query('SELECT 1');
+}, 5000);
 
 //GLOBALS++
 var SOCKET_LIST = {};
@@ -92,7 +93,7 @@ var turn = 'X';
 io.sockets.on('connection', function(socket){//SOCKETS++++++
     SOCKET_LIST[socket.id] = socket;
     
-    socket.on("login", function(username){
+    socket.on("login", function(data){
         if(players < 2){
             players++;
             var symbol;
@@ -102,9 +103,14 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
                 symbol = 'O';
             socket.emit("setSymbol",{symbol});
             //player_accounts[players].id = playerIDs;
-            //player_accounts[players].username = username;
+            player_accounts[players].username = data.uname;
             //player_accounts[players].score = getScore();
             //playerIDs++;
+
+            if(players == 2){
+                var unames = player_accounts[0].username+"-VS-"+player_accounts[1].username;
+                io.broadcast("displayUsernames", {unames});
+            }
         }
         else{
             socket.emit("reload");
@@ -170,6 +176,7 @@ function checkWin(){
             ['','',''],
             ['','','']
         ];
+        player_accounts = [{id: 0, username: "", score: 0}, {id: 0, username: "", score: 0}];
     }
         
 }
