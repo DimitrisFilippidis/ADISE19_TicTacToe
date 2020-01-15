@@ -331,8 +331,8 @@ function translate(square){
             	document.getElementById(data.squareId).innerText = data.player;
             });
             
-            socket.on("setSymbol", function(symbol){
-                playerSymbol = symbol;
+            socket.on("setSymbol", function(data){
+                playerSymbol = data.symbol;
             });
 
             socket.on("reload", function(){

@@ -90,10 +90,10 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             players++;
             var symbol;
             if(players == 1)
-                symbol = "X";
+                symbol = 'X';
             else
-                symbol = "O";
-            socket.emit("setSymbol",symbol);
+                symbol = 'O';
+            socket.emit("setSymbol",{symbol});
             //player_accounts[players].id = playerIDs;
             //player_accounts[players].username = username;
             //player_accounts[players].score = getScore();
