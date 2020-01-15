@@ -283,7 +283,7 @@
             <button id="playBTN" onclick="play();">PLAY</button>
         </div>
 
-        <div id= "uname">  </div>
+        <div id= "uname"></div>
 
         <table id= "ttt_table" style = "visibility: hidden;">
 
@@ -423,7 +423,7 @@ function translate(square){
             }
 
             socket.on("displayUsernames", function(data){
-                document.getElementById("id").innerHTML = "data.uname";
+                document.getElementById("uname").innerHTML = "data.uname";
 
             });
 
@@ -448,12 +448,12 @@ function translate(square){
 
             socket.on("reload", function(){
                 alert("2 users already playing.");
-                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+                window.open('https://adise19-tictactoe.herokuapp.com/','_self');
             });
 
             socket.on("win", function(data){
                 alert(data.winner+" won.");
-                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+                window.open('https://adise19-tictactoe.herokuapp.com/','_self');
             });
         </script>
 
