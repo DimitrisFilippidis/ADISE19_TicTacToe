@@ -103,7 +103,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
                 symbol = 'O';
             socket.emit("setSymbol",{symbol});
             //player_accounts[players].id = playerIDs;
-            player_accounts[players].username = data.uname;
+            player_accounts[players-1].username = data.uname;
             //player_accounts[players].score = getScore();
             //playerIDs++;
 
