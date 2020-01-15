@@ -44,23 +44,29 @@ db.connect((err) => {
     console.log("---MYSQL CONNECTED---");
 });
 
+var disconnected = false;
+
 db.on('error', function(err) {
     console.log('db error', err);
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-      handleDisconnect();                         // lost due to either server restart, or a
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+        disconnected = true;
+        handleDisconnect();                         // lost due to either server restart, or a
     } else {                                      // connnection idle timeout (the wait_timeout
       throw err;                                  // server variable configures this)
     }
   });
 
+  
   function handleDisconnect(){
-    db.connect((err) => {
-        if(err){
-            setInterval(handleDisconnect(), 2000);
-            throw err;
+         if(disconnected){
+            db.connect((err) => {
+                if(err){
+                    setInterval(handleDisconnect(), 2000);
+                    throw err;
+                }
+                console.log("---MYSQL CONNECTED---");
+            });
         }
-        console.log("---MYSQL CONNECTED---");
-    });
   }
 
 //GLOBALS++
