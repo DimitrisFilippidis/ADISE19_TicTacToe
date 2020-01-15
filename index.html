@@ -131,22 +131,12 @@
                 vertical-align:  middle;
                 font-family:  "Comic Sans MS", cursive, sans-serif;
                 font-size: 70px;
-             
-            
-            
             }
-                
-                
-
-                  
+   
             h1 {
                 text-align: center;
-                
-            
             }
-                
-              
-                
+   
             table {
                 border-collapse: collapse;
                 position: absolute;
@@ -188,15 +178,7 @@
                 border-radius: 5px;
                 color: white;
                 font-size: 2em;
-                
-            
-
             }
-
-
-
-            
-
 
         </style>
 
@@ -240,7 +222,7 @@
             var socket = io.connect('https://adise19-tictactoe.herokuapp.com/');
         var origBoard;
         const player1 = 'X';
-
+        var playerSymbol = 'X';
         const player2 = 'O';
 
     
@@ -265,16 +247,14 @@
 
 
 function turnClick(square) {
-
-
 	turn(square.target.id, player1)
 }
 
 function turn(squareId, player) {
-	origBoard[squareId] = player;
-    document.getElementById(squareId).innerText = player;
+	//origBoard[squareId] = player;
+    document.getElementById(squareId).innerText = playerSymbol;
     var arr = translate(squareId);
-    var data = {arr, player, squareId};
+    var data = {arr, playerSymbol, squareId};
     socket.emit("input", data);
 
 
@@ -337,13 +317,8 @@ function translate(square){
                 if(uname.trim() != ""){
                     document.getElementById('login').style = "visibility:hidden;";
                     document.getElementById('ttt_logo').style = "visibility:hidden;";
-                    document.getElementById('ttt_table').style = "visibility:visible;";
-
-                
-
-
-                    //show TTT
-
+                    document.getElementById('ttt_table').style = "visibility:visible;";//show TTT
+                    
                     socket.emit("login", uname);
                 }
                 else{
@@ -356,6 +331,15 @@ function translate(square){
             	document.getElementById(data.squareId).innerText = data.player;
             });
             
+            socket.on("setSymbol", function(symbol){
+                playerSymbol = symbol;
+            });
+
+            socket.on("reload", function(){
+                alert("2 users already playing.");
+                window.open('https://adise19-tictactoe.herokuapp.com/',_self);
+            });
+
         </script>
 
     </body> 

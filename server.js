@@ -88,10 +88,19 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
     socket.on("login", function(username){
         if(players < 2){
             players++;
+            var symbol;
+            if(players == 1)
+                symbol = "X";
+            else
+                symbol = "O";
+            socket.emit("setSymbol",symbol);
             //player_accounts[players].id = playerIDs;
             //player_accounts[players].username = username;
             //player_accounts[players].score = getScore();
             //playerIDs++;
+        }
+        else{
+            socket.emit("reload");
         }
     });
 
@@ -106,8 +115,8 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
         var input = data.player;
 
         board[i][j] = input;
-        checkWin();
         socket.broadcast.emit('oppInput', data);
+        checkWin();
     });
 });
 
@@ -141,6 +150,12 @@ function checkWin(){
      
     if(winner != ""){
         socket.broadcast.emit("win", winner);
+        players = 0;
+        board = [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ];
     }
         
 }
