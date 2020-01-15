@@ -227,6 +227,7 @@ function checkAccExists(name){
     db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
         if (err) throw err;
         res = results.substring(14);
+        console.log("res: "+res);
     });
     if(res.username != ""){
         return true;
