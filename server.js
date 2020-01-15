@@ -102,9 +102,9 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
                 symbol = 'O';
             socket.emit("setSymbol",{symbol});
 
-            if(checkAccExists(data.name)){                
-                player_accounts[players-1].score = getScore(data.uname);
-            }
+            //if(checkAccExists(data.name)){                
+               // player_accounts[players-1].score = getScore(data.uname);
+            //}
             /*else{
                 db.query("INSERT INTO players (id, username, score) VALUES ("+playerIDs+", '"+data.uname+"', "+0+")", function (err, results){
                     if (err) throw err;
@@ -115,7 +115,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             player_accounts[players-1].username = data.uname;
 
             if(players == 2){
-                var unames = player_accounts[0].username+"-Score:"+player_accounts[0].score+"-VS-"+player_accounts[1].username+"-Score:"+player_accounts[1].score;
+                var unames = player_accounts[0].username+":"+player_accounts[0].score+"-VS-"+player_accounts[1].username+":"+player_accounts[1].score;
                 io.emit("displayUsernames", {unames});
             }
         }
@@ -213,7 +213,7 @@ function checkWin(){
         
 }
 
-function getScore(name){
+/*function getScore(name){
     var res;
     db.query("SELECT score FROM players WHERE username = '"+name+"'", function (err, results){   //, fields) {
         if (err) throw err;
@@ -231,8 +231,8 @@ function checkAccExists(name){
         res = results;
         console.log("res: "+JSON.stringify(res));
     });
-    /*if(res.username != ""){
+    if(res.username != ""){
         return true;
     }
-    return false;*/
-}
+    return false;
+}*/
