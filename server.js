@@ -84,7 +84,7 @@ var turn = 'X';
 
 //GLOBALS--
 
-    db.query("SELECT * FROM players", function (err, results){   //, fields) {
+    db.query("SELECT * FROM players", function (err, results){
         if (err) throw err;
         console.log(results);
     });
@@ -102,14 +102,24 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             else
                 symbol = 'O';
             socket.emit("setSymbol",{symbol});
-            //player_accounts[players].id = playerIDs;
+
+            if(checkAccExists(data.name)){                
+                player_accounts[players-1].score = getScore(data.uname);
+            }
+            else{
+                db.query("INSERT INTO players (id, username, score) VALUES ("+playerIDs+", "+data.uname+", "+0+")", function (err, results){
+                    if (err) throw err;
+                    console.log(results);
+                });
+            }
+                
+
+            player_accounts[players-1].id = playerIDs;
             player_accounts[players-1].username = data.uname;
-            console.log("::"+(players-1)+"::"+data.uname);
-            //player_accounts[players].score = getScore();
-            //playerIDs++;
+            playerIDs++;
 
             if(players == 2){
-                var unames = player_accounts[0].username+"-VS-"+player_accounts[1].username;
+                var unames = player_accounts[0].username+"-Score:"+player_accounts[0].username"-VS-"+player_accounts[1].username+"-Score:"+player_accounts[1].score;
                 io.emit("displayUsernames", {unames});
             }
         }
@@ -118,10 +128,6 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
         }
     });
 
-
-    //socket.on("test", function(){
-       // socket.emit("test_response");
-   // });
 
     socket.on("input", function(data){
         var i = data.arr[0];
@@ -150,6 +156,18 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
 function checkWin(){
     var winner = "";
 
+    var i = 0;
+    var j = 0;
+    var notTie = false;
+    
+     for (i=0; i<=2; i++) {
+         for (j=0; j<=2; j++) {
+             if(board[i][j] == ""){
+                     notTie = true;
+             }
+        }
+     }
+
     //orizontia
     if( (board[0][0] == board[0][1]) && (board[0][1] == board[0][2]) )
         winner = board[0][0];
@@ -176,6 +194,11 @@ function checkWin(){
         winner = board[0][2];
      
     if(winner != ""){
+        if(notTie)
+            winner = winner+" won.";
+        else
+            winner = "TIE";
+
         io.emit("win", {winner});
         players = 0;
         board = [
@@ -186,4 +209,23 @@ function checkWin(){
         player_accounts = [{id: 0, username: "", score: 0}, {id: 0, username: "", score: 0}];
     }
         
+}
+
+function getScore(name){
+    db.query("SELECT score FROM players WHERE username = '"+name+"'", function (err, results){   //, fields) {
+        if (err) throw err;
+        console.log(results);
+    });
+    var score = results.score;
+    return score;
+}
+
+function checkAccExists(name){
+    db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
+        if (err) throw err;
+    });
+    if(results != ""){
+        return true;
+    }
+    return false;
 }
