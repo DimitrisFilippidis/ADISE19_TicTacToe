@@ -119,7 +119,7 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             playerIDs++;
 
             if(players == 2){
-                var unames = player_accounts[0].username+"-Score:"+player_accounts[0].username"-VS-"+player_accounts[1].username+"-Score:"+player_accounts[1].score;
+                var unames = player_accounts[0].username+"-Score:"+player_accounts[0].score+"-VS-"+player_accounts[1].username+"-Score:"+player_accounts[1].score;
                 io.emit("displayUsernames", {unames});
             }
         }
