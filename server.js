@@ -104,12 +104,13 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             socket.emit("setSymbol",{symbol});
             //player_accounts[players].id = playerIDs;
             player_accounts[players-1].username = data.uname;
+            
+            console.log("::"+(players-1)+"::"+data.uname);
             //player_accounts[players].score = getScore();
             //playerIDs++;
 
             if(players == 2){
                 var unames = player_accounts[0].username+"-VS-"+player_accounts[1].username;
-                console.log(unames);
                 io.emit("displayUsernames", {unames});
             }
         }
