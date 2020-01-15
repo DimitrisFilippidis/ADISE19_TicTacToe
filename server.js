@@ -212,11 +212,13 @@ function checkWin(){
 }
 
 function getScore(name){
+    var res;
     db.query("SELECT score FROM players WHERE username = '"+name+"'", function (err, results){   //, fields) {
         if (err) throw err;
         console.log(results);
+        res = results;
     });
-    var score = results.score;
+    var score = res.substring(14).score;
     return score;
 }
 
@@ -224,7 +226,7 @@ function checkAccExists(name){
     var res;
     db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
         if (err) throw err;
-        res = results;
+        res = results.substring(14);
     });
     if(res.username != ""){
         return true;
