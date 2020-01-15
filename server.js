@@ -61,7 +61,7 @@ db.on('error', function(err) {
          if(disconnected){
             db.connect((err) => {
                 if(err){
-                    setInterval(handleDisconnect(), 2000);
+                    setInterval(handleDisconnect, 2000);
                     throw err;
                 }
                 console.log("---MYSQL CONNECTED---");
