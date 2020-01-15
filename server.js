@@ -221,10 +221,12 @@ function getScore(name){
 }
 
 function checkAccExists(name){
+    var res;
     db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
         if (err) throw err;
+        res = results;
     });
-    if(results != ""){
+    if(res.username != ""){
         return true;
     }
     return false;
