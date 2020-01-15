@@ -22,13 +22,7 @@ var io = require('socket.io') (server, {});
 //SETUP------
 
 //CONNECT MYSQL
-/*var db = mysql.createConnection({
-    server      : 'users.iee.ihu.gr',
-    user        : 'root',
-    password    : 'dbpass',
-    database    : 'tttdb',
-    _socket     : '/home/student/it/2017/it174982/mysql/run/mysql.sock'
-});*/
+
 
 var db = mysql.createConnection({
     host        : 'eu-cdbr-west-02.cleardb.net',
@@ -43,28 +37,6 @@ db.connect((err) => {
     }
     console.log("---MYSQL CONNECTED---");
 });
-
-/*db.on('error', function(err) {
-    console.log('db error', err);
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-        handleDisconnect();                        // lost due to either server restart, or a
-    } else {                                      // connnection idle timeout (the wait_timeout
-      throw err;                                  // server variable configures this)
-    }
-  });
-
-  
-  function handleDisconnect(){
-            db.connect((err) => {
-                if(err){
-                    setInterval(handleDisconnect, 2000);
-                    throw err;
-                }
-                console.log("---MYSQL CONNECTED---");
-            });
-    }
-  
-*/
 
 setInterval(function () {
     db.query('SELECT 1');
@@ -220,7 +192,7 @@ function checkWin(){
         console.log(results);
         res = results;
     });
-    var score = res.score;
+    var score = JSON.stringify(res)).score;
     return score;
 }
 

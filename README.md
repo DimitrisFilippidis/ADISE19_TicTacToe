@@ -17,7 +17,7 @@ Project Link: https://adise19-tictactoe.herokuapp.com/
 
 Το παιχνιδι χρησιμοποιει WebSockets για ταυτοχρονη επικοινωνια μεταξυ Server και client 
 
-      Client/Server
+      Client:
 
       socket.on                 parameters           result
       =========                 ==========           ======
@@ -29,8 +29,13 @@ Project Link: https://adise19-tictactoe.herokuapp.com/
       win                       winner               Μετα την ανακοινωση του νικητη, η σελιδα ανανεωνεται και βρισκομαστε παλι στην αρχικη οθονη
             
 
+	  Server:
 
-
+      socket.on                 parameters           result
+      =========                 ==========           ======
+	  login                      uname               Συνδέει τους χρήστες στο παιχνίδι.
+	  input           {arr, playerSymbol, squareId}  Καταχωρεί το input του κάθε παίκτη (Θέση και σύμβολο).
+	  disconnect                                     Διαγράφει την πρόοδο του παιχνιδιού αν καποιος παικτης αποχωρησει.
 
      Node.js Modules used:
 
