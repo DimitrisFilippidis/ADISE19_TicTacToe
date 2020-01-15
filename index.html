@@ -416,7 +416,7 @@ function translate(square){
                     document.getElementById('player_usernames').style = "visibility:visible;";
 
                     
-                    socket.emit("login", uname);
+                    socket.emit("login", {uname});
                 }
                 else{
                     alert("Fill in the username field correctly.");

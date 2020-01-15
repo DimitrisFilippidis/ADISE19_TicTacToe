@@ -104,7 +104,6 @@ io.sockets.on('connection', function(socket){//SOCKETS++++++
             socket.emit("setSymbol",{symbol});
             //player_accounts[players].id = playerIDs;
             player_accounts[players-1].username = data.uname;
-            
             console.log("::"+(players-1)+"::"+data.uname);
             //player_accounts[players].score = getScore();
             //playerIDs++;
