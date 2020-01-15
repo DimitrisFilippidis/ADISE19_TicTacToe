@@ -220,15 +220,15 @@ function getScore(name){
         console.log(results);
         res = results;
     });
-    var score = res.substring(14).score;
+    var score = res.score;
     return score;
 }
 
 function checkAccExists(name){
     var res;
-    db.query("SELECT id FROM players WHERE username = '"+name+"'", function (err, results){
+    db.query("SELECT username FROM players WHERE username = '"+name+"'", function (err, results){
         if (err) throw err;
-        res = results;//.substring(14);
+        res = results;
         console.log("res: "+JSON.stringify(res));
     });
     /*if(res.username != ""){
